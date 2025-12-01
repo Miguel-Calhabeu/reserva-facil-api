@@ -1,0 +1,3 @@
+-- Insere um requisito de recurso físico.
+INSERT INTO DOC_TIPORECURSO (DOCUMENTODEREQUISITO, TIPORECURSOFISICO, QUANTIDADE)
+VALUES (%s, %s, %s);

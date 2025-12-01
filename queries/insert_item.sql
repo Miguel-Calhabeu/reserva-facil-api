@@ -1,0 +1,3 @@
+-- Insere um novo item no patrimônio.
+INSERT INTO ITEM (NROPATRIMONIO, STATUSITEM, QUALIDADE, TAMANHO, TIPORECURSOFISICO, ARMAZEM)
+VALUES (%s, %s, %s, %s, %s, %s);
