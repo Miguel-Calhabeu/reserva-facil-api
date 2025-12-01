@@ -19,11 +19,19 @@ def get_db_connection():
     Returns:
         psycopg2.connection: Um objeto de conexão com o banco de dados.
     """
-    conn = psycopg2.connect(
-        host=os.environ.get("DB_HOST"),
-        database=os.environ.get("DB_NAME"),
-        user=os.environ.get("DB_USER"),
-        password=os.environ.get("DB_PASSWORD"),
-        port=os.environ.get("DB_PORT", 5432)
-    )
+    db_url = os.environ.get("DATABASE_URL")
+
+    if db_url:
+        # Se uma URL completa for fornecida (comum em deploys), usa ela.
+        # Ex: postgres://user:pass@host:6543/dbname
+        conn = psycopg2.connect(db_url)
+    else:
+        # Fallback para credenciais individuais
+        conn = psycopg2.connect(
+            host=os.environ.get("DB_HOST"),
+            database=os.environ.get("DB_NAME"),
+            user=os.environ.get("DB_USER"),
+            password=os.environ.get("DB_PASSWORD"),
+            port=os.environ.get("DB_PORT", 5432)
+        )
     return conn
